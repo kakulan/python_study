@@ -1,0 +1,11 @@
+import numpy as np
+
+a = np.arange(1,10).reshape(1,9)
+b =a.T
+c =np.dot(b,a)
+
+for i in c:
+    for j in i:
+        print( "%3d"%(j),end=" " )
+    print(" ")
+

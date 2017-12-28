@@ -1,0 +1,23 @@
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+
+def linedistance(line1p1,line1p2,line2p1,line2p2):
+    #line1p1,line1p2,line2p1,line2p2分别是第一条线的第一个、第二个点，第二条线的第一个、第二个点
+    line1vector = line1p1 - line1p2   #第一条直线的方向量
+    line2vector = line2p1 - line2p2  # 第二条直线的方向量
+    normalvector = np.cross(line1vector,line2vector)     #求出法向量
+    nvector      = line1p1 - line2p1                     #求出连接两条直线的一个向量
+    a = np.dot(normalvector,nvector)
+    b = np.dot(normalvector,normalvector)
+    return(abs(a)/math.sqrt(b))
+
+
+
+p1 = np.array([0,1,0],float)
+p2 = np.array([0,0,0],float)
+p3 = np.array([1,2,3],float)
+p4 = np.array([9,9,9],float)
+
+d = linedistance(p1,p2,p3,p4)
+print("linedistance = ",d)
