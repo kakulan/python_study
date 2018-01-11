@@ -17,10 +17,26 @@ img5=filters.gaussian_filter(img3,sigma=1)
 # center_of_mass()
 #plt.imshow(img5)
 
-labels=measure.label(img5,connectivity=2)  #8连通区域标记
+labels=measure.label(img5,connectivity=2)  #连通区域标记
 print('coin number:',labels.max())  #显示连通区域块数(从0开始标记)
+plt.imshow(img5)
+i = 0
+for region in measure.regionprops(labels): #循环得到每一个连通区域属性集
+    
+    #忽略小区域
+    if region.area < 10:
+        continue
 
-#plt.show()
+    #绘制外包矩形
+    minr, minc, maxr, maxc = region.bbox
+    #rect = mpatches.Rectangle((minc, minr), maxc - minc, maxr - minr, fill=False, edgecolor='yellow', linewidth=2)
+    #ax1.add_patch(rect)
+    plt.text((minc + maxc)/2-10,(minr + maxr)/2, region.area,color='red' )
+    #print("The area of number ",i ," coin is ", region.area)
+    i = i+1
+
+ 
+plt.show()
 
 
 
